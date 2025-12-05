@@ -1,0 +1,51 @@
+Compiling C:\Users\marco\Desktop\Documentation\Code\Time & Alarm\Time & Alarm on 23-Apr-23 at 11:54
+*** Error 1 "Time & Alarm.c" Line 161(1,2): Illegal C character in input file  0x80
+*** Error 1 "Time & Alarm.c" Line 161(1,2): Illegal C character in input file  0x00
+*** Error 12 "Time & Alarm.c" Line 161(120,128): Undefined identifier   Alarm_St
+*** Error 1 "Time & Alarm.c" Line 161(2,3): Illegal C character in input file  0x0E
+*** Error 1 "Time & Alarm.c" Line 161(2,3): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(2,3): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(2,3): Illegal C character in input file  0xFF
+*** Error 1 "Time & Alarm.c" Line 161(2,3): Illegal C character in input file  0xFF
+*** Error 1 "Time & Alarm.c" Line 161(2,3): Illegal C character in input file  0xFF
+*** Error 1 "Time & Alarm.c" Line 161(2,3): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(2,3): Illegal C character in input file  0x06
+*** Error 1 "Time & Alarm.c" Line 161(2,3): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(2,3): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(2,3): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(2,3): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(2,3): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(2,3): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(2,3): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(8,9): Illegal C character in input file  0xD3
+*** Error 1 "Time & Alarm.c" Line 161(8,9): Illegal C character in input file  0xCE
+*** Error 1 "Time & Alarm.c" Line 161(8,9): Illegal C character in input file  0xB5
+*** Error 1 "Time & Alarm.c" Line 161(8,9): Illegal C character in input file  0xE8
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0xDF
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0xEF
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0xFD
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0xE5
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x40
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x8C
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x05
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0xB0
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0xD7
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x01
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x80
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x00
+*** Error 1 "Time & Alarm.c" Line 161(13,14): Illegal C character in input file  0x22 after \
+*** Error 79 "Time & Alarm.c" Line 162(13,14): Expect }
+*** Error 79 "Time & Alarm.c" Line 162(13,14): Expect }

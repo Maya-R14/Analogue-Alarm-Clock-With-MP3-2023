@@ -1,0 +1,137 @@
+[PROJECT]
+Target=Time & Alarm.hex
+Processor_Text=PIC16F690
+CCSVersion=5.080
+Compiler=PCM
+[Target Data]
+FileList=Time & Alarm.c
+[Time & Alarm.c]
+Type=4
+[mru-list]
+1=Time & Alarm.c
+
+[defines]
+buildcount=60
+
+[fileformats]
+forcecoff=0
+
+[ProjectLog]
+Days=9
+D1=19-03-2023
+D1_L=20
+D1_L1=[43464]Project Opened.
+D1_L2=[43538]Started Editing.
+D1_L3=[45879]Stopped Editing.
+D1_L4=[47083]Started Editing.
+D1_L5=[47969]Stopped Editing.
+D1_L6=[47970]Started Editing.
+D1_L7=[48764]Stopped Editing.
+D1_L8=[48775]Started Editing.
+D1_L9=[49549]Stopped Editing.
+D1_L10=[49665]Started Editing.
+D1_L11=[50646]Stopped Editing.
+TotalEdit=118
+TotalDebug=0
+D1_E=85
+D1_D=0
+D1_L12=[53398]Project Closed.
+D1_L13=[53710]Project Opened.
+D1_L14=[53722]Started Editing.
+D1_L15=[54031]Stopped Editing.
+D1_L16=[55572]Started Editing.
+D1_L17=[55897]Stopped Editing.
+D1_L18=[56325]Started Editing.
+D1_L19=[57301]Stopped Editing.
+D1_L20=[58144]Project Closed.
+D2=20-03-2023
+D2_L=12
+D2_L1=[40903]Project Opened.
+D2_L2=[41506]Started Editing.
+D2_L3=[42069]Stopped Editing.
+D2_L4=[42334]Started Editing.
+D2_L5=[42655]Stopped Editing.
+D2_E=5
+D2_D=0
+D2_L6=[47198]Project Closed.
+D2_L7=[50338]Project Opened.
+D2_L8=[50346]Project Closed.
+D2_L9=[51389]Project Opened.
+D2_L10=[52059]Project Closed.
+D2_L11=[56343]Project Opened.
+D2_L12=[56589]Project Closed.
+D3=01-04-2023
+D3_L=4
+D3_L1=[51071]Project Opened.
+D3_L2=[51437]Project Closed.
+D3_L3=[51839]Project Opened.
+D3_L4=[52254]Project Closed.
+D4=12-04-2023
+D4_L=12
+D4_L1=[45345]Project Opened.
+D4_L2=[51799]Started Editing.
+D4_L3=[52099]Stopped Editing.
+D4_L4=[52424]Started Editing.
+D4_L5=[52726]Stopped Editing.
+D4_L6=[53166]Started Editing.
+D4_L7=[53466]Stopped Editing.
+D4_L8=[54613]Started Editing.
+D4_L9=[55091]Stopped Editing.
+D4_L10=[55429]Started Editing.
+D4_L11=[55733]Stopped Editing.
+D4_E=4
+D4_D=0
+D4_L12=[63421]Project Closed.
+D5=13-04-2023
+D5_L=7
+D5_L1=[41778]Project Opened.
+D5_L2=[41859]Project Closed.
+D5_L3=[55655]Project Opened.
+D5_L4=[55966]Started Editing.
+D5_L5=[56266]Stopped Editing.
+D5_L6=[57171]Started Editing.
+D5_L7=[57766]Stopped Editing.
+D6=14-04-2023
+D6_E=5
+D6_D=0
+D6_L=1
+D6_L1=[51564]Project Closed.
+D7=17-04-2023
+D7_L=7
+D7_L1=[51451]Project Opened.
+D7_L2=[51456]Project Closed.
+D7_L3=[51468]Project Opened.
+D7_L4=[51698]Project Opened.
+D7_L5=[51733]Started Editing.
+D7_L6=[52109]Stopped Editing.
+D7_E=2
+D7_D=0
+D7_L7=[72503]Project Closed.
+D8=22-04-2023
+D8_L=1
+D8_L1=[37719]Project Opened.
+D9=23-04-2023
+D9_L=5
+D9_L1=[35816]Project Closed.
+D9_L2=[41865]Project Opened.
+D9_L3=[41893]Started Editing.
+D9_L4=[42894]Stopped Editing.
+D9_E=17
+D9_D=0
+D9_L5=[42894]Project Closed.
+
+[Opened Files]
+1=Time & Alarm.c
+t1=201
+Count=1
+2=Stepper_Header_V2.h
+t2=1
+3=Steps_2_time.h
+t3=6
+4=DS3231.h
+t4=49
+5=Time & Alarm.tre
+t5=-1
+[Units]
+Count=1
+1=Time & Alarm (main)

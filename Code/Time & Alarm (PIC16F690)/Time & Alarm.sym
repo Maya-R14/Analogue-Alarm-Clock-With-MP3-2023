@@ -1,0 +1,210 @@
+004-005 @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+005     PORTA
+005.2   A2
+005.4   A4
+005.5   A5
+006     PORTB
+006.4   B4
+006.5   B5
+006.6   B6
+006.7   B7
+007     PORTC
+007.0   C0
+007.1   C1
+007.2   C2
+007.3   C3
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+020     @SCRATCH
+021     @SCRATCH
+021     _RETURN_
+022     @SCRATCH
+023     @SCRATCH
+024     @INTERRUPT_AREA
+025     @INTERRUPT_AREA
+026     @INTERRUPT_AREA
+027     @INTERRUPT_AREA
+028     @INTERRUPT_AREA
+029     @INTERRUPT_AREA
+02A     @INTERRUPT_AREA
+02B     @INTERRUPT_AREA
+02C-02D S1_Current_Pos
+02E-02F S1_Setpoint
+030-031 S2_Current_Pos
+032-033 S2_Setpoint
+034-035 time_min
+036-037 time_hr
+038     Adjust_Time_tog
+039     Adjust_Alarm_tog
+03A     Alarm_Stat
+03B     hr_or_min
+03C     Read_time_DEC.Adr
+03C     Read_time_BCD.Adr
+03C     Alarm_status.ONOFF
+03C-03D Min_2_Steps.min
+03C-03D Steps_2_hr.steps
+03C-03D hours.hours
+03C     Adjust_time.@SCRATCH1
+03C     display_time.@SCRATCH1
+03C     Adjust_Alarm.@SCRATCH1
+03C     Buttons.@SCRATCH1
+03C     Alarm_Check.@SCRATCH1
+03C     Set_Zero.@SCRATCH1
+03D     Read_time_BCD.data
+03D     Read_time_DEC.data
+03D     Adjust_time.@SCRATCH2
+03D     display_time.@SCRATCH2
+03D     Adjust_Alarm.@SCRATCH2
+03E-03F Stepper1.S1_Setpoint
+03E     @I2C_READ_1.P1
+03E-03F hours.min
+03E-03F Steps_2_min.steps
+03E-03F Stepper2.S2_Setpoint
+03E     BCD_2_DEC.to_convert
+03E     Min_2_Steps.@SCRATCH1
+03E     Steps_2_hr.@SCRATCH1
+03E     Adjust_time.@SCRATCH3
+03E     Adjust_Alarm.@SCRATCH3
+03F     @I2C_READ_1.@SCRATCH1
+03F     BCD_2_DEC.@SCRATCH1
+03F     Min_2_Steps.@SCRATCH2
+03F     Steps_2_hr.@SCRATCH2
+03F     Adjust_time.@SCRATCH4
+03F     Adjust_Alarm.@SCRATCH4
+040     Set_Alarm.hr
+040-041 hr_2_Steps.hr
+040     Set_Time.hr
+040-041 S2_Fire_Coils.S2_Current_Pos
+040-041 S1_Fire_Coils.S1_Current_Pos
+040     @I2C_READ_1.@SCRATCH2
+040     BCD_2_DEC.@SCRATCH2
+040     Steps_2_min.@SCRATCH1
+040     hours.@SCRATCH1
+041     Set_Time.min
+041     @MUL88.P1
+041     Set_Alarm.min
+041     Steps_2_min.@SCRATCH2
+041     hours.@SCRATCH2
+042     @MUL88.P1
+042     Set_Alarm.AMPM
+042     S1_Fire_Coils.remainder
+042     S2_Fire_Coils.remainder
+042     Set_Time.AMPM
+042-043 hr_min_2_Steps.min
+042     hr_2_Steps.@SCRATCH1
+043     @delay_ms1.P1
+043     MCP23008_OUT.output
+043     DEC_2_BCD.to_convert
+043     Set_Time.@SCRATCH1
+043     Set_Alarm.@SCRATCH1
+043     hr_2_Steps.@SCRATCH2
+044     @I2C_WRITE_1.P1
+044     MCP23008_Write.Device
+044-045 @MUL1616.P1
+044-045 @DIV1616.P2
+044     DEC_2_BCD.@SCRATCH1
+045     @DIV88.P1
+045     MCP23008_Write.address
+046-047 @MUL1616.P1
+046-047 @DIV1616.P2
+046     @DIV88.P3
+046     MCP23008_Write.data
+047     @I2C_WRITE_2.P1
+047     @DIV88.@SCRATCH1
+048     @MUL1616.@SCRATCH1
+048     @DIV1616.@SCRATCH1
+049     RA_isr.@SCRATCH1
+04A     RA_isr.@SCRATCH2
+085     TRISA
+086     TRISB
+087     TRISC
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+11B.6   C2OUT
+11B.7   C1OUT
+
+ROM Allocation:
+000031  RA_isr
+00005D  @I2C_WRITE_2
+000091  MCP23008_Write
+0000B8  Enable_MCP23008
+0000B8  Enable_Steppers
+0000D6  @I2C_WRITE_1
+00010A  Alarm_status
+000131  @delay_ms1
+00013F  MCP23008_OUT
+000147  S1_Fire_Coils
+000167  Stepper1
+000196  S2_Fire_Coils
+0001B6  Stepper2
+0001E5  Set_Zero
+000225  Clear_Alarm
+00024C  Buttons
+000284  Overflow_Protect
+0002CD  @DIV1616
+0002F2  Steps_2_hr
+000318  Steps_2_min
+00033E  @DIV88
+000353  DEC_2_BCD
+000365  Set_Time
+00039D  Adjust_time
+0003EC  Set_Alarm
+000422  Adjust_Alarm
+000471  @I2C_READ_1
+0004A4  BCD_2_DEC
+0004AE  @MUL88
+0004D9  @MUL1616
+0004EE  display_time
+0004F0  Read_time_DEC
+00054E  Min_2_Steps
+000570  Read_time_BCD
+0005DC  hours
+0005E0  hr_2_Steps
+0005FF  hr_min_2_Steps
+00062D  Alarm_Check
+000639  MAIN
+000639  @cinit1
+000654  @cinit2
+
+Project Directory:
+    C:\Users\marco\Desktop\School\SEMESTER 8\PROJECT 2\Code\Set_Time_V3\Last Code\Time & Alarm\
+
+Project Files:
+    Time & Alarm.c                                          [17-Apr-23 14:23  CRC=D8AD9460]
+    Set_Time.h                                              [19-Mar-23 12:24  CRC=D872A938]
+    ..\..\..\..\..\..\..\..\..\..\Program Files (x86)\PICC\Devices\16F690.h [20-Jul-18 14:23  CRC=E4ACFA07]
+    DS3231.h                                                [19-Mar-23 11:07  CRC=5BDD67C1]
+    Stepper_Header_V2.h                                     [18-Apr-23 14:08  CRC=A55A0D5B]
+    MCP23008.h                                              [18-Mar-23 13:05  CRC=4DB02769]
+    Steps_2_time.h                                          [25-Feb-23 16:57  CRC=BC8EDF1B]
+
+Source signature=5DD2925A
+Program memory checksum=0000
+Program memory CRC=0000
+Hex file CRC=6A76
+
+Units:
+    Time & Alarm (main)
+
+Compiler Settings:
+    Processor:      PIC16F690
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Compile Mode:       CCS5
+
+Output Files:
+    XREF file:   Time & Alarm.xsym
+    Errors:      Time & Alarm.err
+    Ext Symbols: Time & Alarm.esym
+    INHX8:       Time & Alarm.hex
+    Symbols:     Time & Alarm.sym
+    List:        Time & Alarm.lst
+    Debug/COFF:  Time & Alarm.cof
+    Project:     Time & Alarm.ccspjt
+    Call Tree:   Time & Alarm.tre
+    Statistics:  Time & Alarm.STA

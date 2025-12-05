@@ -1,0 +1,2226 @@
+CCS PCM C Compiler, Version 5.080, 5967               22-Apr-23 10:29
+
+               Filename:   C:\Users\marco\Desktop\School\SEMESTER 8\PROJECT 2\Code\Set_Time_V3\Last Code\Time & Alarm\Time & Alarm.lst
+
+               ROM used:   1677 words (41%)
+                           Largest free fragment is 2048
+               RAM used:   29 (11%) at main() level
+                           44 (17%) worst case
+               Stack used: 6 locations (5 in main + 1 for interrupts)
+               Stack size: 8
+
+*
+0000:  MOVLW  06
+0001:  MOVWF  0A
+0002:  GOTO   639
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  25
+0008:  MOVF   7F,W
+0009:  MOVWF  24
+000A:  MOVF   0A,W
+000B:  MOVWF  2B
+000C:  CLRF   0A
+000D:  SWAPF  24,F
+000E:  MOVF   04,W
+000F:  MOVWF  26
+0010:  MOVF   20,W
+0011:  MOVWF  27
+0012:  MOVF   21,W
+0013:  MOVWF  28
+0014:  MOVF   22,W
+0015:  MOVWF  29
+0016:  MOVF   23,W
+0017:  MOVWF  2A
+0018:  BCF    03.7
+0019:  BCF    03.5
+001A:  BTFSS  0B.3
+001B:  GOTO   01E
+001C:  BTFSC  0B.0
+001D:  GOTO   02F
+001E:  MOVF   26,W
+001F:  MOVWF  04
+0020:  MOVF   27,W
+0021:  MOVWF  20
+0022:  MOVF   28,W
+0023:  MOVWF  21
+0024:  MOVF   29,W
+0025:  MOVWF  22
+0026:  MOVF   2A,W
+0027:  MOVWF  23
+0028:  MOVF   2B,W
+0029:  MOVWF  0A
+002A:  SWAPF  25,W
+002B:  MOVWF  03
+002C:  SWAPF  7F,F
+002D:  SWAPF  7F,W
+002E:  RETFIE
+002F:  BCF    0A.3
+0030:  GOTO   031
+.................... #include <Set_Time.h> 
+.................... #include <16F690.h> 
+.................... //////////// Standard Header file for the PIC16F690 device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2014 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F690 
+*
+02CD:  CLRF   21
+02CE:  CLRF   22
+02CF:  CLRF   20
+02D0:  CLRF   23
+02D1:  MOVF   47,W
+02D2:  BTFSS  03.2
+02D3:  GOTO   2D7
+02D4:  MOVF   46,W
+02D5:  BTFSC  03.2
+02D6:  GOTO   2F1
+02D7:  MOVLW  10
+02D8:  MOVWF  48
+02D9:  BCF    03.0
+02DA:  RLF    44,F
+02DB:  RLF    45,F
+02DC:  RLF    20,F
+02DD:  RLF    23,F
+02DE:  MOVF   47,W
+02DF:  SUBWF  23,W
+02E0:  BTFSS  03.2
+02E1:  GOTO   2E4
+02E2:  MOVF   46,W
+02E3:  SUBWF  20,W
+02E4:  BTFSS  03.0
+02E5:  GOTO   2ED
+02E6:  MOVF   46,W
+02E7:  SUBWF  20,F
+02E8:  BTFSS  03.0
+02E9:  DECF   23,F
+02EA:  MOVF   47,W
+02EB:  SUBWF  23,F
+02EC:  BSF    03.0
+02ED:  RLF    21,F
+02EE:  RLF    22,F
+02EF:  DECFSZ 48,F
+02F0:  GOTO   2D9
+02F1:  RETURN
+*
+033E:  MOVF   46,W
+033F:  CLRF   21
+0340:  SUBWF  45,W
+0341:  BTFSC  03.0
+0342:  GOTO   346
+0343:  MOVF   45,W
+0344:  MOVWF  20
+0345:  GOTO   352
+0346:  CLRF   20
+0347:  MOVLW  08
+0348:  MOVWF  47
+0349:  RLF    45,F
+034A:  RLF    20,F
+034B:  MOVF   46,W
+034C:  SUBWF  20,W
+034D:  BTFSC  03.0
+034E:  MOVWF  20
+034F:  RLF    21,F
+0350:  DECFSZ 47,F
+0351:  GOTO   349
+0352:  RETURN
+*
+04AE:  CLRF   20
+04AF:  CLRF   21
+04B0:  MOVF   41,W
+04B1:  BCF    03.0
+04B2:  BTFSC  42.0
+04B3:  ADDWF  20,F
+04B4:  RRF    20,F
+04B5:  RRF    21,F
+04B6:  BTFSC  42.1
+04B7:  ADDWF  20,F
+04B8:  RRF    20,F
+04B9:  RRF    21,F
+04BA:  BTFSC  42.2
+04BB:  ADDWF  20,F
+04BC:  RRF    20,F
+04BD:  RRF    21,F
+04BE:  BTFSC  42.3
+04BF:  ADDWF  20,F
+04C0:  RRF    20,F
+04C1:  RRF    21,F
+04C2:  BTFSC  42.4
+04C3:  ADDWF  20,F
+04C4:  RRF    20,F
+04C5:  RRF    21,F
+04C6:  BTFSC  42.5
+04C7:  ADDWF  20,F
+04C8:  RRF    20,F
+04C9:  RRF    21,F
+04CA:  BTFSC  42.6
+04CB:  ADDWF  20,F
+04CC:  RRF    20,F
+04CD:  RRF    21,F
+04CE:  BTFSC  42.7
+04CF:  ADDWF  20,F
+04D0:  RRF    20,F
+04D1:  RRF    21,F
+*
+04D9:  MOVLW  10
+04DA:  MOVWF  48
+04DB:  CLRF   20
+04DC:  CLRF   23
+04DD:  RRF    45,F
+04DE:  RRF    44,F
+04DF:  BTFSS  03.0
+04E0:  GOTO   4E7
+04E1:  MOVF   46,W
+04E2:  ADDWF  20,F
+04E3:  BTFSC  03.0
+04E4:  INCF   23,F
+04E5:  MOVF   47,W
+04E6:  ADDWF  23,F
+04E7:  RRF    23,F
+04E8:  RRF    20,F
+04E9:  RRF    22,F
+04EA:  RRF    21,F
+04EB:  DECFSZ 48,F
+04EC:  GOTO   4DD
+04ED:  RETURN
+....................  
+.................... #list 
+....................  
+.................... #device ADC=10 
+.................... #use delay(internal=2000000) 
+*
+0131:  MOVLW  43
+0132:  MOVWF  04
+0133:  BCF    03.7
+0134:  MOVF   00,W
+0135:  BTFSC  03.2
+0136:  GOTO   13E
+0137:  MOVLW  A5
+0138:  MOVWF  20
+0139:  DECFSZ 20,F
+013A:  GOTO   139
+013B:  NOP
+013C:  DECFSZ 00,F
+013D:  GOTO   137
+013E:  RETURN
+....................  
+.................... #byte TRISA = 0X85 
+.................... #byte PORTA = 0x05 
+....................  
+.................... #byte PORTB = 0x06 
+.................... #byte TRISB = 0X86 
+....................  
+.................... #byte PORTC = 0x07 
+.................... #byte TRISC = 0x87 
+....................  
+.................... #include <DS3231.h> 
+.................... #use i2c(Master,fast=350000,sda=PIN_C7,scl=PIN_C6,FORCE_SW) 
+*
+00D6:  MOVLW  08
+00D7:  MOVWF  21
+00D8:  NOP
+00D9:  BCF    07.6
+00DA:  BSF    03.5
+00DB:  BCF    07.6
+00DC:  NOP
+00DD:  BCF    03.5
+00DE:  RLF    44,F
+00DF:  BCF    07.7
+00E0:  BTFSS  03.0
+00E1:  GOTO   0E5
+00E2:  BSF    03.5
+00E3:  BSF    07.7
+00E4:  BCF    03.5
+00E5:  BTFSC  03.0
+00E6:  GOTO   0EA
+00E7:  BSF    03.5
+00E8:  BCF    07.7
+00E9:  BCF    03.5
+00EA:  BSF    03.5
+00EB:  BSF    07.6
+00EC:  BCF    03.5
+00ED:  BTFSS  07.6
+00EE:  GOTO   0ED
+00EF:  DECFSZ 21,F
+00F0:  GOTO   0D8
+00F1:  NOP
+00F2:  BCF    07.6
+00F3:  BSF    03.5
+00F4:  BCF    07.6
+00F5:  NOP
+00F6:  BSF    07.7
+00F7:  NOP
+00F8:  NOP
+00F9:  BSF    07.6
+00FA:  BCF    03.5
+00FB:  BTFSS  07.6
+00FC:  GOTO   0FB
+00FD:  CLRF   21
+00FE:  NOP
+00FF:  BTFSC  07.7
+0100:  BSF    21.0
+0101:  BCF    07.6
+0102:  BSF    03.5
+0103:  BCF    07.6
+0104:  BCF    03.5
+0105:  BCF    07.7
+0106:  BSF    03.5
+0107:  BCF    07.7
+0108:  BCF    03.5
+0109:  RETURN
+*
+0471:  MOVLW  08
+0472:  MOVWF  3F
+0473:  MOVF   20,W
+0474:  MOVWF  40
+0475:  BSF    03.5
+0476:  BSF    07.7
+0477:  NOP
+0478:  BSF    07.6
+0479:  BCF    03.5
+047A:  BTFSS  07.6
+047B:  GOTO   47A
+047C:  BTFSC  07.7
+047D:  BSF    03.0
+047E:  BTFSS  07.7
+047F:  BCF    03.0
+0480:  RLF    21,F
+0481:  NOP
+0482:  BSF    03.5
+0483:  BCF    07.6
+0484:  BCF    03.5
+0485:  BCF    07.6
+0486:  DECFSZ 3F,F
+0487:  GOTO   475
+0488:  BSF    03.5
+0489:  BSF    07.7
+048A:  NOP
+048B:  BCF    03.5
+048C:  BCF    07.7
+048D:  MOVF   40,W
+048E:  BTFSC  03.2
+048F:  GOTO   493
+0490:  BSF    03.5
+0491:  BCF    07.7
+0492:  BCF    03.5
+0493:  NOP
+0494:  BSF    03.5
+0495:  BSF    07.6
+0496:  BCF    03.5
+0497:  BTFSS  07.6
+0498:  GOTO   497
+0499:  NOP
+049A:  BCF    07.6
+049B:  BSF    03.5
+049C:  BCF    07.6
+049D:  NOP
+049E:  BCF    03.5
+049F:  BCF    07.7
+04A0:  BSF    03.5
+04A1:  BCF    07.7
+04A2:  BCF    03.5
+04A3:  RETURN
+....................  
+.................... #Define AM 0x40 
+.................... #Define PM 0x60 
+....................  
+.................... #define ON 0b00011110 
+.................... #define OFF 0b00011100 
+....................  
+....................  
+.................... int DEC_2_BCD (INT to_convert) 
+.................... { 
+....................    RETURN ((to_convert / 10) << 4) + (to_convert % 10) ; 
+*
+0353:  MOVF   43,W
+0354:  MOVWF  45
+0355:  MOVLW  0A
+0356:  MOVWF  46
+0357:  CALL   33E
+0358:  SWAPF  21,W
+0359:  MOVWF  44
+035A:  MOVLW  F0
+035B:  ANDWF  44,F
+035C:  MOVF   43,W
+035D:  MOVWF  45
+035E:  MOVLW  0A
+035F:  MOVWF  46
+0360:  CALL   33E
+0361:  MOVF   20,W
+0362:  ADDWF  44,W
+0363:  MOVWF  21
+0364:  RETURN
+.................... } 
+....................  
+.................... int  BCD_2_DEC(INT to_convert) 
+.................... { 
+....................    RETURN (to_convert >> 4) * 10 + (to_convert&0x0F); 
+*
+04A4:  SWAPF  3E,W
+04A5:  MOVWF  20
+04A6:  MOVLW  0F
+04A7:  ANDWF  20,F
+04A8:  MOVF   20,W
+04A9:  MOVWF  40
+04AA:  MOVF   40,W
+04AB:  MOVWF  41
+04AC:  MOVLW  0A
+04AD:  MOVWF  42
+*
+04D2:  MOVF   21,W
+04D3:  MOVWF  3F
+04D4:  MOVF   3E,W
+04D5:  ANDLW  0F
+04D6:  ADDWF  21,W
+04D7:  MOVWF  21
+04D8:  RETURN
+.................... } 
+....................  
+.................... void Set_Time(hr,min,AMPM) 
+.................... { 
+....................    I2C_start (); 
+*
+0365:  BSF    03.5
+0366:  BSF    07.7
+0367:  NOP
+0368:  BSF    07.6
+0369:  NOP
+036A:  BCF    03.5
+036B:  BCF    07.7
+036C:  BSF    03.5
+036D:  BCF    07.7
+036E:  NOP
+036F:  BCF    03.5
+0370:  BCF    07.6
+0371:  BSF    03.5
+0372:  BCF    07.6
+....................    I2C_Write (0xD0); 
+0373:  MOVLW  D0
+0374:  BCF    03.5
+0375:  MOVWF  44
+0376:  CALL   0D6
+....................    I2C_Write (0); 
+0377:  CLRF   44
+0378:  CALL   0D6
+....................    I2C_Write (DEC_2_BCD (0)); //update sec 
+0379:  CLRF   43
+037A:  CALL   353
+037B:  MOVF   21,W
+037C:  MOVWF  43
+037D:  MOVWF  44
+037E:  CALL   0D6
+....................    I2C_Write (DEC_2_BCD (min)); //update min 
+037F:  MOVF   41,W
+0380:  MOVWF  43
+0381:  CALL   353
+0382:  MOVF   21,W
+0383:  MOVWF  43
+0384:  MOVWF  44
+0385:  CALL   0D6
+....................    I2C_Write (AMPM|DEC_2_BCD (hr)); //update hour 
+0386:  MOVF   40,W
+0387:  MOVWF  43
+0388:  CALL   353
+0389:  MOVF   42,W
+038A:  IORWF  21,W
+038B:  MOVWF  43
+038C:  MOVWF  44
+038D:  CALL   0D6
+....................    I2C_stop (); 
+038E:  BSF    03.5
+038F:  BCF    07.7
+0390:  NOP
+0391:  BSF    07.6
+0392:  BCF    03.5
+0393:  BTFSS  07.6
+0394:  GOTO   393
+0395:  NOP
+0396:  GOTO   397
+0397:  NOP
+0398:  BSF    03.5
+0399:  BSF    07.7
+039A:  NOP
+039B:  BCF    03.5
+039C:  RETURN
+.................... } 
+....................  
+.................... int Read_time_BCD (INT Adr) 
+.................... { 
+....................    INT data; 
+....................    I2C_start (); 
+*
+0570:  BSF    03.5
+0571:  BSF    07.7
+0572:  NOP
+0573:  BSF    07.6
+0574:  NOP
+0575:  BCF    03.5
+0576:  BCF    07.7
+0577:  BSF    03.5
+0578:  BCF    07.7
+0579:  NOP
+057A:  BCF    03.5
+057B:  BCF    07.6
+057C:  BSF    03.5
+057D:  BCF    07.6
+....................    I2C_Write (0xD0); 
+057E:  MOVLW  D0
+057F:  BCF    03.5
+0580:  MOVWF  44
+0581:  CALL   0D6
+....................    I2C_Write (Adr); 
+0582:  MOVF   3C,W
+0583:  MOVWF  44
+0584:  CALL   0D6
+....................    I2C_start (); 
+0585:  BSF    03.5
+0586:  BSF    07.7
+0587:  NOP
+0588:  BSF    07.6
+0589:  NOP
+058A:  BCF    03.5
+058B:  BTFSS  07.6
+058C:  GOTO   58B
+058D:  BCF    07.7
+058E:  BSF    03.5
+058F:  BCF    07.7
+0590:  NOP
+0591:  BCF    03.5
+0592:  BCF    07.6
+0593:  BSF    03.5
+0594:  BCF    07.6
+....................    I2C_Write (0xD1); 
+0595:  MOVLW  D1
+0596:  BCF    03.5
+0597:  MOVWF  44
+0598:  CALL   0D6
+....................    data = I2C_read (0); 
+0599:  CLRF   20
+059A:  CALL   471
+059B:  MOVF   21,W
+059C:  MOVWF  3D
+....................    I2C_stop (); 
+059D:  BSF    03.5
+059E:  BCF    07.7
+059F:  NOP
+05A0:  BSF    07.6
+05A1:  BCF    03.5
+05A2:  BTFSS  07.6
+05A3:  GOTO   5A2
+05A4:  NOP
+05A5:  GOTO   5A6
+05A6:  NOP
+05A7:  BSF    03.5
+05A8:  BSF    07.7
+05A9:  NOP
+....................     
+....................    RETURN data; 
+05AA:  BCF    03.5
+05AB:  MOVF   3D,W
+05AC:  MOVWF  21
+.................... } 
+....................  
+.................... int Read_time_DEC (INT Adr) 
+.................... { 
+....................    INT data; 
+....................    I2C_start (); 
+*
+04F0:  BSF    03.5
+04F1:  BSF    07.7
+04F2:  NOP
+04F3:  BSF    07.6
+04F4:  NOP
+04F5:  BCF    03.5
+04F6:  BCF    07.7
+04F7:  BSF    03.5
+04F8:  BCF    07.7
+04F9:  NOP
+04FA:  BCF    03.5
+04FB:  BCF    07.6
+04FC:  BSF    03.5
+04FD:  BCF    07.6
+....................    I2C_Write (0xD0); 
+04FE:  MOVLW  D0
+04FF:  BCF    03.5
+0500:  MOVWF  44
+0501:  CALL   0D6
+....................    I2C_Write (Adr); 
+0502:  MOVF   3C,W
+0503:  MOVWF  44
+0504:  CALL   0D6
+....................    I2C_start (); 
+0505:  BSF    03.5
+0506:  BSF    07.7
+0507:  NOP
+0508:  BSF    07.6
+0509:  NOP
+050A:  BCF    03.5
+050B:  BTFSS  07.6
+050C:  GOTO   50B
+050D:  BCF    07.7
+050E:  BSF    03.5
+050F:  BCF    07.7
+0510:  NOP
+0511:  BCF    03.5
+0512:  BCF    07.6
+0513:  BSF    03.5
+0514:  BCF    07.6
+....................    I2C_Write (0xD1); 
+0515:  MOVLW  D1
+0516:  BCF    03.5
+0517:  MOVWF  44
+0518:  CALL   0D6
+....................    data = I2C_read (0); 
+0519:  CLRF   20
+051A:  CALL   471
+051B:  MOVF   21,W
+051C:  MOVWF  3D
+....................    I2C_stop (); 
+051D:  BSF    03.5
+051E:  BCF    07.7
+051F:  NOP
+0520:  BSF    07.6
+0521:  BCF    03.5
+0522:  BTFSS  07.6
+0523:  GOTO   522
+0524:  NOP
+0525:  GOTO   526
+0526:  NOP
+0527:  BSF    03.5
+0528:  BSF    07.7
+0529:  NOP
+....................     
+....................    RETURN BCD_2_DEC (data) ; 
+052A:  BCF    03.5
+052B:  MOVF   3D,W
+052C:  MOVWF  3E
+052D:  CALL   4A4
+052E:  MOVF   21,W
+.................... } 
+....................  
+.................... void Alarm_status (int ONOFF) //ON and Off alarm on Control register (2nd alarm) 
+.................... { 
+....................    I2C_start (); 
+*
+010A:  BSF    03.5
+010B:  BSF    07.7
+010C:  NOP
+010D:  BSF    07.6
+010E:  NOP
+010F:  BCF    03.5
+0110:  BCF    07.7
+0111:  BSF    03.5
+0112:  BCF    07.7
+0113:  NOP
+0114:  BCF    03.5
+0115:  BCF    07.6
+0116:  BSF    03.5
+0117:  BCF    07.6
+....................    I2C_Write (0xD0); 
+0118:  MOVLW  D0
+0119:  BCF    03.5
+011A:  MOVWF  44
+011B:  CALL   0D6
+....................    I2C_Write (0x0E); 
+011C:  MOVLW  0E
+011D:  MOVWF  44
+011E:  CALL   0D6
+....................    I2C_Write (ONOFF); //update sec 
+011F:  MOVF   3C,W
+0120:  MOVWF  44
+0121:  CALL   0D6
+....................    I2C_stop (); 
+0122:  BSF    03.5
+0123:  BCF    07.7
+0124:  NOP
+0125:  BSF    07.6
+0126:  BCF    03.5
+0127:  BTFSS  07.6
+0128:  GOTO   127
+0129:  NOP
+012A:  GOTO   12B
+012B:  NOP
+012C:  BSF    03.5
+012D:  BSF    07.7
+012E:  NOP
+012F:  BCF    03.5
+0130:  RETURN
+.................... } 
+.................... void Clear_Alarm (void) //Reset Status register and clear interrupt flag 
+.................... { 
+....................    I2C_start (); 
+*
+0225:  BSF    03.5
+0226:  BSF    07.7
+0227:  NOP
+0228:  BSF    07.6
+0229:  NOP
+022A:  BCF    03.5
+022B:  BCF    07.7
+022C:  BSF    03.5
+022D:  BCF    07.7
+022E:  NOP
+022F:  BCF    03.5
+0230:  BCF    07.6
+0231:  BSF    03.5
+0232:  BCF    07.6
+....................    I2C_Write (0xD0); 
+0233:  MOVLW  D0
+0234:  BCF    03.5
+0235:  MOVWF  44
+0236:  CALL   0D6
+....................    I2C_Write (0x0F); 
+0237:  MOVLW  0F
+0238:  MOVWF  44
+0239:  CALL   0D6
+....................    I2C_Write (0b00001100);   //0X0C 
+023A:  MOVLW  0C
+023B:  MOVWF  44
+023C:  CALL   0D6
+....................    I2C_stop (); 
+023D:  BSF    03.5
+023E:  BCF    07.7
+023F:  NOP
+0240:  BSF    07.6
+0241:  BCF    03.5
+0242:  BTFSS  07.6
+0243:  GOTO   242
+0244:  NOP
+0245:  GOTO   246
+0246:  NOP
+0247:  BSF    03.5
+0248:  BSF    07.7
+0249:  NOP
+024A:  BCF    03.5
+024B:  RETURN
+.................... } 
+....................   
+....................  
+.................... void Set_Alarm(hr,min,AMPM) //Set alarm based on set time function 
+.................... { 
+....................    I2C_start (); 
+*
+03EC:  BSF    03.5
+03ED:  BSF    07.7
+03EE:  NOP
+03EF:  BSF    07.6
+03F0:  NOP
+03F1:  BCF    03.5
+03F2:  BCF    07.7
+03F3:  BSF    03.5
+03F4:  BCF    07.7
+03F5:  NOP
+03F6:  BCF    03.5
+03F7:  BCF    07.6
+03F8:  BSF    03.5
+03F9:  BCF    07.6
+....................    I2C_Write (0xD0); 
+03FA:  MOVLW  D0
+03FB:  BCF    03.5
+03FC:  MOVWF  44
+03FD:  CALL   0D6
+....................    I2C_Write (0x0B); 
+03FE:  MOVLW  0B
+03FF:  MOVWF  44
+0400:  CALL   0D6
+....................    I2C_Write (DEC_2_BCD (min)); //update min 
+0401:  MOVF   41,W
+0402:  MOVWF  43
+0403:  CALL   353
+0404:  MOVF   21,W
+0405:  MOVWF  43
+0406:  MOVWF  44
+0407:  CALL   0D6
+....................    I2C_Write (AMPM|DEC_2_BCD (hr)); //update hour 
+0408:  MOVF   40,W
+0409:  MOVWF  43
+040A:  CALL   353
+040B:  MOVF   42,W
+040C:  IORWF  21,W
+040D:  MOVWF  43
+040E:  MOVWF  44
+040F:  CALL   0D6
+....................    I2C_Write (0b10000000); 
+0410:  MOVLW  80
+0411:  MOVWF  44
+0412:  CALL   0D6
+....................    I2C_stop (); 
+0413:  BSF    03.5
+0414:  BCF    07.7
+0415:  NOP
+0416:  BSF    07.6
+0417:  BCF    03.5
+0418:  BTFSS  07.6
+0419:  GOTO   418
+041A:  NOP
+041B:  GOTO   41C
+041C:  NOP
+041D:  BSF    03.5
+041E:  BSF    07.7
+041F:  NOP
+0420:  BCF    03.5
+0421:  RETURN
+.................... } 
+....................  
+.................... #include <Stepper_Header_V2.h> 
+.................... #include <MCP23008.h> 
+.................... #use i2c(Master,fast=350000,sda=PIN_C4,scl=PIN_C5,FORCE_SW) 
+*
+005D:  MOVLW  08
+005E:  MOVWF  21
+005F:  NOP
+0060:  BCF    07.5
+0061:  BSF    03.5
+0062:  BCF    07.5
+0063:  NOP
+0064:  BCF    03.5
+0065:  RLF    47,F
+0066:  BCF    07.4
+0067:  BTFSS  03.0
+0068:  GOTO   06C
+0069:  BSF    03.5
+006A:  BSF    07.4
+006B:  BCF    03.5
+006C:  BTFSC  03.0
+006D:  GOTO   071
+006E:  BSF    03.5
+006F:  BCF    07.4
+0070:  BCF    03.5
+0071:  BSF    03.5
+0072:  BSF    07.5
+0073:  BCF    03.5
+0074:  BTFSS  07.5
+0075:  GOTO   074
+0076:  DECFSZ 21,F
+0077:  GOTO   05F
+0078:  NOP
+0079:  BCF    07.5
+007A:  BSF    03.5
+007B:  BCF    07.5
+007C:  NOP
+007D:  BSF    07.4
+007E:  NOP
+007F:  NOP
+0080:  BSF    07.5
+0081:  BCF    03.5
+0082:  BTFSS  07.5
+0083:  GOTO   082
+0084:  CLRF   21
+0085:  NOP
+0086:  BTFSC  07.4
+0087:  BSF    21.0
+0088:  BCF    07.5
+0089:  BSF    03.5
+008A:  BCF    07.5
+008B:  BCF    03.5
+008C:  BCF    07.4
+008D:  BSF    03.5
+008E:  BCF    07.4
+008F:  BCF    03.5
+0090:  RETURN
+....................  
+.................... void MCP23008_Write(int Device, int Address, int Data) 
+.................... { 
+....................    //Device = Device | 0x00;           // 1 at lowest bit for indicating writing, 0x40 is device address 
+....................    i2c_start();                                    // Start of communication 
+0091:  BSF    03.5
+0092:  BSF    07.4
+0093:  NOP
+0094:  BSF    07.5
+0095:  NOP
+0096:  BCF    03.5
+0097:  BCF    07.4
+0098:  BSF    03.5
+0099:  BCF    07.4
+009A:  NOP
+009B:  BCF    03.5
+009C:  BCF    07.5
+009D:  BSF    03.5
+009E:  BCF    07.5
+....................    i2c_write(Device);                       // To indicate to I2C which device we're using 
+009F:  BCF    03.5
+00A0:  MOVF   44,W
+00A1:  MOVWF  47
+00A2:  CALL   05D
+....................    i2c_write(Address);                     // Indicates which register we're writing to 
+00A3:  MOVF   45,W
+00A4:  MOVWF  47
+00A5:  CALL   05D
+....................    i2c_write(Data);                               // Byte to write for config or for setting the pins 
+00A6:  MOVF   46,W
+00A7:  MOVWF  47
+00A8:  CALL   05D
+....................    i2c_stop();                                     // End of communication 
+00A9:  BSF    03.5
+00AA:  BCF    07.4
+00AB:  NOP
+00AC:  BSF    07.5
+00AD:  BCF    03.5
+00AE:  BTFSS  07.5
+00AF:  GOTO   0AE
+00B0:  NOP
+00B1:  GOTO   0B2
+00B2:  NOP
+00B3:  BSF    03.5
+00B4:  BSF    07.4
+00B5:  NOP
+00B6:  BCF    03.5
+00B7:  RETURN
+.................... } 
+....................  
+.................... Void Enable_MCP23008 (void) 
+.................... { 
+....................   MCP23008_Write(0x40, 0x00, 0x00); //IODIR 
+00B8:  MOVLW  40
+00B9:  MOVWF  44
+00BA:  CLRF   45
+00BB:  CLRF   46
+00BC:  CALL   091
+....................   MCP23008_Write(0x40, 0x05, 0x20); //IOCON 
+00BD:  MOVLW  40
+00BE:  MOVWF  44
+00BF:  MOVLW  05
+00C0:  MOVWF  45
+00C1:  MOVLW  20
+00C2:  MOVWF  46
+00C3:  CALL   091
+.................... } 
+....................  
+.................... Void MCP23008_OUT (int output) 
+.................... { 
+....................   MCP23008_Write(0x40, 0X09, output); 
+*
+013F:  MOVLW  40
+0140:  MOVWF  44
+0141:  MOVLW  09
+0142:  MOVWF  45
+0143:  MOVF   43,W
+0144:  MOVWF  46
+0145:  CALL   091
+0146:  RETURN
+.................... } 
+....................  
+.................... int16 S1_Current_Pos; 
+.................... int16 S1_Setpoint; 
+.................... int16 S2_Current_Pos; 
+.................... int16 S2_Setpoint; 
+....................  
+.................... void Enable_Steppers(void) 
+.................... { 
+.................... Enable_MCP23008(); 
+.................... S1_Setpoint = 10000; //The range is from 1001 to 2048. 2048 is equivalent to 1000, which is equivalent to position 0. 
+*
+00C4:  MOVLW  27
+00C5:  MOVWF  2F
+00C6:  MOVLW  10
+00C7:  MOVWF  2E
+.................... S1_Current_Pos = 10000; 
+00C8:  MOVLW  27
+00C9:  MOVWF  2D
+00CA:  MOVLW  10
+00CB:  MOVWF  2C
+.................... S2_Setpoint = 10000; 
+00CC:  MOVLW  27
+00CD:  MOVWF  33
+00CE:  MOVLW  10
+00CF:  MOVWF  32
+.................... S2_Current_Pos = 10000; 
+00D0:  MOVLW  27
+00D1:  MOVWF  31
+00D2:  MOVLW  10
+00D3:  MOVWF  30
+00D4:  BCF    0A.3
+00D5:  GOTO   656 (RETURN)
+.................... } 
+....................  
+.................... void S1_Fire_Coils(INT16 S1_Current_Pos) 
+.................... { 
+....................    delay_ms (2); 
+*
+0147:  MOVLW  02
+0148:  MOVWF  43
+0149:  CALL   131
+....................    INT remainder; 
+....................    remainder = S1_Current_Pos % 4; 
+014A:  MOVF   40,W
+014B:  ANDLW  03
+014C:  MOVWF  42
+....................  
+....................    IF (remainder == 0){MCP23008_OUT (0b00010000);} 
+014D:  MOVF   42,F
+014E:  BTFSS  03.2
+014F:  GOTO   153
+0150:  MOVLW  10
+0151:  MOVWF  43
+0152:  CALL   13F
+....................    IF (remainder == 1){MCP23008_OUT (0b00100000);} 
+0153:  DECFSZ 42,W
+0154:  GOTO   158
+0155:  MOVLW  20
+0156:  MOVWF  43
+0157:  CALL   13F
+....................    IF (remainder == 2){MCP23008_OUT (0b01000000);} 
+0158:  MOVF   42,W
+0159:  SUBLW  02
+015A:  BTFSS  03.2
+015B:  GOTO   15F
+015C:  MOVLW  40
+015D:  MOVWF  43
+015E:  CALL   13F
+....................    IF (remainder == 3){MCP23008_OUT (0b10000000);} 
+015F:  MOVF   42,W
+0160:  SUBLW  03
+0161:  BTFSS  03.2
+0162:  GOTO   166
+0163:  MOVLW  80
+0164:  MOVWF  43
+0165:  CALL   13F
+0166:  RETURN
+.................... } 
+....................  
+.................... void Stepper1(INT16 S1_Setpoint) 
+.................... { 
+....................    WHILE (S1_Current_Pos != S1_Setpoint) //repeat while current position and S1_Setpoint don't match 
+0167:  MOVF   3E,W
+0168:  SUBWF  2C,W
+0169:  BTFSS  03.2
+016A:  GOTO   16F
+016B:  MOVF   3F,W
+016C:  SUBWF  2D,W
+016D:  BTFSC  03.2
+016E:  GOTO   195
+....................    { 
+....................       IF (S1_Current_Pos < S1_Setpoint) 
+016F:  MOVF   2D,W
+0170:  SUBWF  3F,W
+0171:  BTFSS  03.0
+0172:  GOTO   181
+0173:  BTFSS  03.2
+0174:  GOTO   179
+0175:  MOVF   3E,W
+0176:  SUBWF  2C,W
+0177:  BTFSC  03.0
+0178:  GOTO   181
+....................       { 
+....................          S1_Current_Pos++; //increase current position 
+0179:  INCF   2C,F
+017A:  BTFSC  03.2
+017B:  INCF   2D,F
+....................          S1_Fire_Coils (S1_Current_Pos); 
+017C:  MOVF   2D,W
+017D:  MOVWF  41
+017E:  MOVF   2C,W
+017F:  MOVWF  40
+0180:  CALL   147
+....................       } 
+....................  
+....................       IF (S1_Current_Pos > S1_Setpoint) 
+0181:  MOVF   3F,W
+0182:  SUBWF  2D,W
+0183:  BTFSS  03.0
+0184:  GOTO   194
+0185:  BTFSS  03.2
+0186:  GOTO   18B
+0187:  MOVF   2C,W
+0188:  SUBWF  3E,W
+0189:  BTFSC  03.0
+018A:  GOTO   194
+....................       { 
+....................          S1_Current_Pos--; //decrease current position 
+018B:  MOVF   2C,W
+018C:  BTFSC  03.2
+018D:  DECF   2D,F
+018E:  DECF   2C,F
+....................          S1_Fire_Coils (S1_Current_Pos); 
+018F:  MOVF   2D,W
+0190:  MOVWF  41
+0191:  MOVF   2C,W
+0192:  MOVWF  40
+0193:  CALL   147
+....................       } 
+0194:  GOTO   167
+....................    } 
+0195:  RETURN
+.................... } 
+....................  
+.................... void S2_Fire_Coils(INT16 S2_Current_Pos) 
+.................... { 
+....................    delay_ms (2); 
+0196:  MOVLW  02
+0197:  MOVWF  43
+0198:  CALL   131
+....................    INT remainder; 
+....................    remainder = S2_Current_Pos % 4; 
+0199:  MOVF   40,W
+019A:  ANDLW  03
+019B:  MOVWF  42
+....................  
+....................    IF (remainder == 0){MCP23008_OUT (0b00000001);} 
+019C:  MOVF   42,F
+019D:  BTFSS  03.2
+019E:  GOTO   1A2
+019F:  MOVLW  01
+01A0:  MOVWF  43
+01A1:  CALL   13F
+....................    IF (remainder == 1){MCP23008_OUT (0b00000010);} 
+01A2:  DECFSZ 42,W
+01A3:  GOTO   1A7
+01A4:  MOVLW  02
+01A5:  MOVWF  43
+01A6:  CALL   13F
+....................    IF (remainder == 2){MCP23008_OUT (0b00000100);} 
+01A7:  MOVF   42,W
+01A8:  SUBLW  02
+01A9:  BTFSS  03.2
+01AA:  GOTO   1AE
+01AB:  MOVLW  04
+01AC:  MOVWF  43
+01AD:  CALL   13F
+....................    IF (remainder == 3){MCP23008_OUT (0b00001000);} 
+01AE:  MOVF   42,W
+01AF:  SUBLW  03
+01B0:  BTFSS  03.2
+01B1:  GOTO   1B5
+01B2:  MOVLW  08
+01B3:  MOVWF  43
+01B4:  CALL   13F
+01B5:  RETURN
+.................... } 
+....................  
+.................... void Stepper2(INT16 S2_Setpoint) 
+.................... { 
+....................    WHILE (S2_Current_Pos != S2_Setpoint) //repeat while current position and S2_Setpoint don't match 
+01B6:  MOVF   3E,W
+01B7:  SUBWF  30,W
+01B8:  BTFSS  03.2
+01B9:  GOTO   1BE
+01BA:  MOVF   3F,W
+01BB:  SUBWF  31,W
+01BC:  BTFSC  03.2
+01BD:  GOTO   1E4
+....................    { 
+....................       IF (S2_Current_Pos < S2_Setpoint) 
+01BE:  MOVF   31,W
+01BF:  SUBWF  3F,W
+01C0:  BTFSS  03.0
+01C1:  GOTO   1D0
+01C2:  BTFSS  03.2
+01C3:  GOTO   1C8
+01C4:  MOVF   3E,W
+01C5:  SUBWF  30,W
+01C6:  BTFSC  03.0
+01C7:  GOTO   1D0
+....................       { 
+....................          S2_Current_Pos++; //increase current position 
+01C8:  INCF   30,F
+01C9:  BTFSC  03.2
+01CA:  INCF   31,F
+....................          S2_Fire_Coils (S2_Current_Pos); 
+01CB:  MOVF   31,W
+01CC:  MOVWF  41
+01CD:  MOVF   30,W
+01CE:  MOVWF  40
+01CF:  CALL   196
+....................       } 
+....................  
+....................       IF (S2_Current_Pos > S2_Setpoint) 
+01D0:  MOVF   3F,W
+01D1:  SUBWF  31,W
+01D2:  BTFSS  03.0
+01D3:  GOTO   1E3
+01D4:  BTFSS  03.2
+01D5:  GOTO   1DA
+01D6:  MOVF   30,W
+01D7:  SUBWF  3E,W
+01D8:  BTFSC  03.0
+01D9:  GOTO   1E3
+....................       { 
+....................          S2_Current_Pos--; //decrease current position 
+01DA:  MOVF   30,W
+01DB:  BTFSC  03.2
+01DC:  DECF   31,F
+01DD:  DECF   30,F
+....................          S2_Fire_Coils (S2_Current_Pos); 
+01DE:  MOVF   31,W
+01DF:  MOVWF  41
+01E0:  MOVF   30,W
+01E1:  MOVWF  40
+01E2:  CALL   196
+....................       } 
+01E3:  GOTO   1B6
+....................    } 
+01E4:  RETURN
+.................... } 
+....................  
+....................  
+.................... void Overflow_Protect (VOID) 
+.................... { 
+....................    IF (S1_Current_Pos > 3047) 
+*
+0284:  MOVF   2D,W
+0285:  SUBLW  0A
+0286:  BTFSC  03.0
+0287:  GOTO   29B
+0288:  XORLW  FF
+0289:  BTFSS  03.2
+028A:  GOTO   28F
+028B:  MOVF   2C,W
+028C:  SUBLW  E7
+028D:  BTFSC  03.0
+028E:  GOTO   29B
+....................    { 
+....................       S1_Current_Pos -= 2048; 
+028F:  MOVLW  00
+0290:  SUBWF  2C,F
+0291:  MOVLW  08
+0292:  BTFSS  03.0
+0293:  MOVLW  09
+0294:  SUBWF  2D,F
+....................       S1_Setpoint -= 2048; 
+0295:  MOVLW  00
+0296:  SUBWF  2E,F
+0297:  MOVLW  08
+0298:  BTFSS  03.0
+0299:  MOVLW  09
+029A:  SUBWF  2F,F
+....................    } 
+....................  
+....................    IF (S1_Current_Pos < 1000) 
+029B:  MOVF   2D,W
+029C:  SUBLW  03
+029D:  BTFSS  03.0
+029E:  GOTO   2A8
+029F:  BTFSS  03.2
+02A0:  GOTO   2A5
+02A1:  MOVF   2C,W
+02A2:  SUBLW  E7
+02A3:  BTFSS  03.0
+02A4:  GOTO   2A8
+....................    { 
+....................       S1_Current_Pos += 2048; 
+02A5:  MOVLW  08
+02A6:  ADDWF  2D,F
+....................       S1_Setpoint += 2048; 
+02A7:  ADDWF  2F,F
+....................    } 
+....................  
+....................    IF (S2_Current_Pos > 3047) 
+02A8:  MOVF   31,W
+02A9:  SUBLW  0A
+02AA:  BTFSC  03.0
+02AB:  GOTO   2BF
+02AC:  XORLW  FF
+02AD:  BTFSS  03.2
+02AE:  GOTO   2B3
+02AF:  MOVF   30,W
+02B0:  SUBLW  E7
+02B1:  BTFSC  03.0
+02B2:  GOTO   2BF
+....................    { 
+....................       S2_Current_Pos -= 2048; 
+02B3:  MOVLW  00
+02B4:  SUBWF  30,F
+02B5:  MOVLW  08
+02B6:  BTFSS  03.0
+02B7:  MOVLW  09
+02B8:  SUBWF  31,F
+....................       S2_Setpoint -= 2048; 
+02B9:  MOVLW  00
+02BA:  SUBWF  32,F
+02BB:  MOVLW  08
+02BC:  BTFSS  03.0
+02BD:  MOVLW  09
+02BE:  SUBWF  33,F
+....................    } 
+....................  
+....................    IF (S2_Current_Pos < 1000) 
+02BF:  MOVF   31,W
+02C0:  SUBLW  03
+02C1:  BTFSS  03.0
+02C2:  GOTO   2CC
+02C3:  BTFSS  03.2
+02C4:  GOTO   2C9
+02C5:  MOVF   30,W
+02C6:  SUBLW  E7
+02C7:  BTFSS  03.0
+02C8:  GOTO   2CC
+....................    { 
+....................       S2_Current_Pos += 2048; 
+02C9:  MOVLW  08
+02CA:  ADDWF  31,F
+....................       S2_Setpoint += 2048; 
+02CB:  ADDWF  33,F
+....................    } 
+02CC:  RETURN
+.................... } 
+....................  
+....................  
+.................... #Include <Steps_2_time.h> 
+.................... int16 Min_2_Steps(INT16 min) 
+.................... { 
+....................    RETURN min * 34 + 1000; 
+*
+054E:  MOVF   3D,W
+054F:  MOVWF  45
+0550:  MOVF   3C,W
+0551:  MOVWF  44
+0552:  CLRF   47
+0553:  MOVLW  22
+0554:  MOVWF  46
+0555:  CALL   4D9
+0556:  MOVF   22,W
+0557:  MOVWF  3F
+0558:  MOVF   21,W
+0559:  MOVWF  3E
+055A:  MOVLW  E8
+055B:  ADDWF  21,W
+055C:  MOVWF  21
+055D:  MOVF   22,W
+055E:  MOVWF  23
+055F:  MOVLW  03
+0560:  BTFSC  03.0
+0561:  MOVLW  04
+0562:  ADDWF  23,F
+0563:  MOVF   23,W
+0564:  MOVWF  22
+.................... } 
+....................  
+.................... int16 hr_2_Steps(INT16 hr) 
+.................... { 
+....................    RETURN hr * 170 + 1000; 
+*
+05E0:  MOVF   41,W
+05E1:  MOVWF  45
+05E2:  MOVF   40,W
+05E3:  MOVWF  44
+05E4:  CLRF   47
+05E5:  MOVLW  AA
+05E6:  MOVWF  46
+05E7:  CALL   4D9
+05E8:  MOVF   22,W
+05E9:  MOVWF  43
+05EA:  MOVF   21,W
+05EB:  MOVWF  42
+05EC:  MOVLW  E8
+05ED:  ADDWF  21,W
+05EE:  MOVWF  21
+05EF:  MOVF   22,W
+05F0:  MOVWF  23
+05F1:  MOVLW  03
+05F2:  BTFSC  03.0
+05F3:  MOVLW  04
+05F4:  ADDWF  23,F
+05F5:  MOVF   23,W
+05F6:  MOVWF  22
+.................... } 
+....................  
+.................... int16 Steps_2_min(INT16 steps) 
+.................... { 
+....................    If (steps >= 3040) 
+*
+0318:  MOVF   3F,W
+0319:  SUBLW  0A
+031A:  BTFSC  03.0
+031B:  GOTO   328
+031C:  XORLW  FF
+031D:  BTFSS  03.2
+031E:  GOTO   323
+031F:  MOVF   3E,W
+0320:  SUBLW  DF
+0321:  BTFSC  03.0
+0322:  GOTO   328
+....................    { 
+....................    Return 0; 
+0323:  MOVLW  00
+0324:  MOVWF  21
+0325:  MOVWF  22
+0326:  GOTO   33D
+....................    } 
+0327:  GOTO   33D
+....................    Else 
+....................     
+....................    RETURN (steps-1000)/34; 
+0328:  MOVLW  E8
+0329:  SUBWF  3E,W
+032A:  MOVWF  40
+032B:  MOVF   3F,W
+032C:  MOVWF  41
+032D:  MOVLW  03
+032E:  BTFSS  03.0
+032F:  MOVLW  04
+0330:  SUBWF  41,F
+0331:  MOVF   41,W
+0332:  MOVWF  45
+0333:  MOVF   40,W
+0334:  MOVWF  44
+0335:  CLRF   47
+0336:  MOVLW  22
+0337:  MOVWF  46
+0338:  CALL   2CD
+0339:  MOVF   22,W
+033A:  MOVWF  23
+033B:  MOVF   22,W
+033C:  MOVWF  22
+033D:  RETURN
+.................... } 
+....................  
+.................... int16 Steps_2_hr(INT16 steps) 
+.................... { 
+....................    If (Steps < 1170) 
+*
+02F2:  MOVF   3D,W
+02F3:  SUBLW  04
+02F4:  BTFSS  03.0
+02F5:  GOTO   302
+02F6:  BTFSS  03.2
+02F7:  GOTO   2FC
+02F8:  MOVF   3C,W
+02F9:  SUBLW  91
+02FA:  BTFSS  03.0
+02FB:  GOTO   302
+....................    { 
+....................    Return 12; 
+02FC:  MOVLW  0C
+02FD:  MOVWF  21
+02FE:  MOVLW  00
+02FF:  MOVWF  22
+0300:  GOTO   317
+....................    } 
+0301:  GOTO   317
+....................    Else  
+....................     
+....................    Return (steps-1000)/170; 
+0302:  MOVLW  E8
+0303:  SUBWF  3C,W
+0304:  MOVWF  3E
+0305:  MOVF   3D,W
+0306:  MOVWF  3F
+0307:  MOVLW  03
+0308:  BTFSS  03.0
+0309:  MOVLW  04
+030A:  SUBWF  3F,F
+030B:  MOVF   3F,W
+030C:  MOVWF  45
+030D:  MOVF   3E,W
+030E:  MOVWF  44
+030F:  CLRF   47
+0310:  MOVLW  AA
+0311:  MOVWF  46
+0312:  CALL   2CD
+0313:  MOVF   22,W
+0314:  MOVWF  23
+0315:  MOVF   22,W
+0316:  MOVWF  22
+0317:  RETURN
+....................     
+.................... } 
+....................     
+.................... int16 hr_min_2_Steps(INT16 min) 
+.................... { 
+....................    min = min / 6; 
+*
+05FF:  MOVF   43,W
+0600:  MOVWF  45
+0601:  MOVF   42,W
+0602:  MOVWF  44
+0603:  CLRF   47
+0604:  MOVLW  06
+0605:  MOVWF  46
+0606:  CALL   2CD
+0607:  MOVF   22,W
+0608:  MOVWF  43
+0609:  MOVF   21,W
+060A:  MOVWF  42
+....................    RETURN min * 17; 
+060B:  MOVF   43,W
+060C:  MOVWF  45
+060D:  MOVF   42,W
+060E:  MOVWF  44
+060F:  CLRF   47
+0610:  MOVLW  11
+0611:  MOVWF  46
+0612:  CALL   4D9
+0613:  MOVF   22,W
+0614:  MOVWF  23
+0615:  MOVF   22,W
+0616:  MOVWF  22
+.................... } 
+....................  
+.................... int16 hours(int16 hours, int16 min) 
+.................... { 
+.................... return (hr_2_Steps (hours) + hr_min_2_Steps (min)); 
+*
+05DC:  MOVF   3D,W
+05DD:  MOVWF  41
+05DE:  MOVF   3C,W
+05DF:  MOVWF  40
+*
+05F7:  MOVF   22,W
+05F8:  MOVWF  41
+05F9:  MOVF   21,W
+05FA:  MOVWF  40
+05FB:  MOVF   3F,W
+05FC:  MOVWF  43
+05FD:  MOVF   3E,W
+05FE:  MOVWF  42
+*
+0617:  MOVF   22,W
+0618:  MOVWF  23
+0619:  MOVF   21,W
+061A:  ADDWF  40,W
+061B:  MOVWF  21
+061C:  MOVF   41,W
+061D:  BTFSC  03.0
+061E:  INCFSZ 41,W
+061F:  ADDWF  23,F
+0620:  MOVF   23,W
+0621:  MOVWF  22
+.................... } 
+....................  
+....................  
+....................  
+.................... #bit A2 = 0x05.2 //Encoder PB 
+.................... #bit A4 = 0x05.4 //Encoder S2 
+.................... #bit A5 = 0x05.5 //Encoder S1 
+....................  
+.................... #bit B4 = 0x06.4 //PB Adjust_Time_Tog 
+.................... #bit B5 = 0x06.5 //PB Adjust_Alarm_Tog 
+.................... #bit B6 = 0x06.6 //Hall Sensor 
+.................... #bit B7 = 0x06.7 //Hall Sensor 
+....................  
+.................... #bit C0 = 0x07.0 //SWITCH Alarm ON/OFF 
+.................... #bit C1 = 0x07.1 //SWITCH AM/PM 
+.................... #bit C2 = 0x07.2 //Alarm INT 
+.................... #bit C3 = 0x07.3 // 
+.................... //#bit C4 = 0x07.4 //I2C MS23008  
+.................... //#bit C5 = 0x07.5 //I2C MS23008 
+.................... //#bit C6 = 0x07.6 //I2C DS3231 
+.................... //#bit C7 = 0x07.7 //I2C DS3231 
+....................  
+.................... int16 time_min; 
+.................... int16 time_hr; 
+....................  
+.................... void Adjust_time(VOID); 
+.................... void Adjust_Alarm(VOID); 
+.................... void display_time(VOID); 
+....................  
+.................... void Buttons (VOID); 
+....................  
+.................... int Adjust_Time_tog; 
+.................... int Adjust_Alarm_tog; 
+.................... int Alarm_Stat; 
+.................... int hr_or_min; 
+....................  
+.................... Void Alarm_Check(VOID); 
+....................  
+.................... Void Set_Zero(VOID); 
+....................  
+.................... #INT_RA 
+.................... void  RA_isr(VOID)  
+.................... { 
+....................    IF (hr_or_min == 0) 
+*
+0031:  MOVF   3B,F
+0032:  BTFSS  03.2
+0033:  GOTO   046
+....................    { 
+....................       IF (A4 == 1&&A5 == 1) S2_Setpoint += 17; 
+0034:  BTFSS  05.4
+0035:  GOTO   03C
+0036:  BTFSS  05.5
+0037:  GOTO   03C
+0038:  MOVLW  11
+0039:  ADDWF  32,F
+003A:  BTFSC  03.0
+003B:  INCF   33,F
+....................       IF (A4 == 0&&A5 == 1) S2_Setpoint -= 17;  
+003C:  BTFSC  05.4
+003D:  GOTO   046
+003E:  BTFSS  05.5
+003F:  GOTO   046
+0040:  MOVLW  11
+0041:  SUBWF  32,F
+0042:  MOVLW  00
+0043:  BTFSS  03.0
+0044:  MOVLW  01
+0045:  SUBWF  33,F
+....................    } 
+....................  
+....................    IF (hr_or_min == 1) 
+0046:  DECFSZ 3B,W
+0047:  GOTO   05A
+....................    { 
+....................       IF (A4 == 1&&A5 == 1) S1_Setpoint += 17; 
+0048:  BTFSS  05.4
+0049:  GOTO   050
+004A:  BTFSS  05.5
+004B:  GOTO   050
+004C:  MOVLW  11
+004D:  ADDWF  2E,F
+004E:  BTFSC  03.0
+004F:  INCF   2F,F
+....................       IF (A4 == 0&&A5 == 1) S1_Setpoint -= 17; 
+0050:  BTFSC  05.4
+0051:  GOTO   05A
+0052:  BTFSS  05.5
+0053:  GOTO   05A
+0054:  MOVLW  11
+0055:  SUBWF  2E,F
+0056:  MOVLW  00
+0057:  BTFSS  03.0
+0058:  MOVLW  01
+0059:  SUBWF  2F,F
+....................    } 
+005A:  BCF    0B.0
+005B:  BCF    0A.3
+005C:  GOTO   01E
+.................... } 
+....................  
+.................... void main() 
+*
+0639:  MOVF   03,W
+063A:  ANDLW  1F
+063B:  MOVWF  03
+063C:  MOVLW  51
+063D:  BSF    03.5
+063E:  MOVWF  0F
+063F:  CLRF   10
+0640:  MOVF   0F,W
+0641:  BCF    03.5
+0642:  BSF    03.6
+0643:  BCF    1F.0
+0644:  BCF    1F.1
+0645:  BCF    1F.2
+0646:  BCF    1F.3
+0647:  BCF    03.6
+0648:  BCF    1F.6
+0649:  MOVLW  00
+064A:  BSF    03.6
+064B:  MOVWF  1E
+064C:  CLRF   19
+064D:  CLRF   1A
+064E:  BSF    03.5
+064F:  CLRF   1E
+0650:  BCF    03.5
+0651:  CLRF   1B
+0652:  BCF    03.6
+0653:  BCF    0D.5
+0654:  BCF    03.7
+.................... { 
+....................    Enable_Steppers (); 
+0655:  GOTO   0B8
+....................     
+....................    TRISA = 0xff; 
+0656:  MOVLW  FF
+0657:  BSF    03.5
+0658:  MOVWF  05
+....................    TRISB = 0xff; 
+0659:  MOVWF  06
+....................    TRISC = 0XFF; 
+065A:  MOVWF  07
+....................     
+....................    enable_interrupts (GLOBAL); 
+065B:  MOVLW  C0
+065C:  BCF    03.5
+065D:  IORWF  0B,F
+....................     
+....................  //  Time_hr = 12; 
+....................  //  Time_min = 0; 
+....................    hr_or_min = 0; 
+065E:  CLRF   3B
+....................     
+....................    Adjust_Time_tog = 0; 
+065F:  CLRF   38
+....................    Adjust_Alarm_tog = 0; 
+0660:  CLRF   39
+....................     
+....................    Alarm_status (Off); 
+0661:  MOVLW  1C
+0662:  MOVWF  3C
+0663:  CALL   10A
+....................    Alarm_Stat = 0; 
+0664:  CLRF   3A
+....................     
+....................    Set_Zero(); 
+0665:  GOTO   1E5
+....................     
+....................    WHILE (TRUE) 
+....................    { 
+....................       Buttons () ; 
+0666:  GOTO   24C
+....................        
+....................       IF (Adjust_Time_tog == 1 && Adjust_Alarm_tog == 0) 
+0667:  DECFSZ 38,W
+0668:  GOTO   672
+0669:  MOVF   39,F
+066A:  BTFSS  03.2
+066B:  GOTO   672
+....................       { 
+....................          enable_interrupts (INT_RA5); 
+066C:  BSF    0B.3
+066D:  BSF    03.5
+066E:  BSF    16.5
+....................          Adjust_time (); 
+066F:  BCF    03.5
+0670:  GOTO   39D
+....................       } 
+0671:  GOTO   68A
+....................        
+....................       else if (Adjust_Time_tog == 0 && Adjust_Alarm_tog == 1) 
+0672:  MOVF   38,F
+0673:  BTFSS  03.2
+0674:  GOTO   67D
+0675:  DECFSZ 39,W
+0676:  GOTO   67D
+....................       { 
+....................          enable_interrupts (INT_RA5); 
+0677:  BSF    0B.3
+0678:  BSF    03.5
+0679:  BSF    16.5
+....................          Adjust_Alarm () ; 
+067A:  BCF    03.5
+067B:  GOTO   422
+....................       } 
+067C:  GOTO   68A
+....................       
+....................       else if (Adjust_Time_tog == 0 && Adjust_Alarm_tog == 0) 
+067D:  MOVF   38,F
+067E:  BTFSS  03.2
+067F:  GOTO   688
+0680:  MOVF   39,F
+0681:  BTFSS  03.2
+0682:  GOTO   688
+....................       { 
+....................          disable_interrupts (INT_RA5); 
+0683:  BSF    03.5
+0684:  BCF    16.5
+....................          Display_time (); 
+0685:  BCF    03.5
+0686:  GOTO   4EE
+....................       } 
+0687:  GOTO   68A
+....................  
+....................       ELSE 
+....................       { 
+....................          Adjust_Time_tog = 0; 
+0688:  CLRF   38
+....................          Adjust_Time_tog = 0; 
+0689:  CLRF   38
+....................       } 
+....................        
+....................       Alarm_Check () ; 
+068A:  GOTO   62D
+068B:  GOTO   666
+....................    } 
+.................... } 
+....................  
+068C:  SLEEP
+.................... void Adjust_time(VOID) 
+.................... { 
+....................    IF (A2 == 0){hr_or_min = ! hr_or_min; delay_ms (100); }//Toggle Button 
+*
+039D:  BTFSC  05.2
+039E:  GOTO   3A9
+039F:  MOVF   3B,F
+03A0:  BTFSC  03.2
+03A1:  GOTO   3A4
+03A2:  MOVLW  00
+03A3:  GOTO   3A5
+03A4:  MOVLW  01
+03A5:  MOVWF  3B
+03A6:  MOVLW  64
+03A7:  MOVWF  43
+03A8:  CALL   131
+....................    Stepper1 (S1_Setpoint); 
+03A9:  MOVF   2F,W
+03AA:  MOVWF  3F
+03AB:  MOVF   2E,W
+03AC:  MOVWF  3E
+03AD:  CALL   167
+....................    Stepper2 (S2_Setpoint); 
+03AE:  MOVF   33,W
+03AF:  MOVWF  3F
+03B0:  MOVF   32,W
+03B1:  MOVWF  3E
+03B2:  CALL   1B6
+....................    Overflow_Protect (); 
+03B3:  CALL   284
+....................    IF (C1 == 1) Set_Time (Steps_2_hr (S2_Setpoint), Steps_2_min (S1_Setpoint), PM); 
+03B4:  BTFSS  07.1
+03B5:  GOTO   3CF
+03B6:  MOVF   33,W
+03B7:  MOVWF  3D
+03B8:  MOVF   32,W
+03B9:  MOVWF  3C
+03BA:  CALL   2F2
+03BB:  MOVF   22,W
+03BC:  MOVWF  3D
+03BD:  MOVF   21,W
+03BE:  MOVWF  3C
+03BF:  MOVF   2F,W
+03C0:  MOVWF  3F
+03C1:  MOVF   2E,W
+03C2:  MOVWF  3E
+03C3:  CALL   318
+03C4:  MOVF   22,W
+03C5:  MOVWF  3F
+03C6:  MOVF   21,W
+03C7:  MOVWF  3E
+03C8:  MOVF   3C,W
+03C9:  MOVWF  40
+03CA:  MOVF   21,W
+03CB:  MOVWF  41
+03CC:  MOVLW  60
+03CD:  MOVWF  42
+03CE:  CALL   365
+....................    IF (C1 == 0) Set_Time (Steps_2_hr (S2_Setpoint), Steps_2_min (S1_Setpoint), AM); 
+03CF:  BTFSC  07.1
+03D0:  GOTO   3EA
+03D1:  MOVF   33,W
+03D2:  MOVWF  3D
+03D3:  MOVF   32,W
+03D4:  MOVWF  3C
+03D5:  CALL   2F2
+03D6:  MOVF   22,W
+03D7:  MOVWF  3D
+03D8:  MOVF   21,W
+03D9:  MOVWF  3C
+03DA:  MOVF   2F,W
+03DB:  MOVWF  3F
+03DC:  MOVF   2E,W
+03DD:  MOVWF  3E
+03DE:  CALL   318
+03DF:  MOVF   22,W
+03E0:  MOVWF  3F
+03E1:  MOVF   21,W
+03E2:  MOVWF  3E
+03E3:  MOVF   3C,W
+03E4:  MOVWF  40
+03E5:  MOVF   21,W
+03E6:  MOVWF  41
+03E7:  MOVLW  40
+03E8:  MOVWF  42
+03E9:  CALL   365
+03EA:  BCF    0A.3
+03EB:  GOTO   671 (RETURN)
+.................... } 
+....................  
+.................... void display_time(VOID) 
+.................... { 
+....................    //// Minutes and Stepper1 //// 
+....................    Time_min = Read_time_DEC (0x01); 
+*
+04EE:  MOVLW  01
+04EF:  MOVWF  3C
+*
+052F:  CLRF   35
+0530:  MOVF   21,W
+0531:  MOVWF  34
+....................     
+....................    IF (Time_min == 0&&S1_Current_Pos != 1000) 
+0532:  MOVF   34,F
+0533:  BTFSS  03.2
+0534:  GOTO   54A
+0535:  MOVF   35,F
+0536:  BTFSS  03.2
+0537:  GOTO   54A
+0538:  MOVF   2C,W
+0539:  SUBLW  E8
+053A:  BTFSS  03.2
+053B:  GOTO   540
+053C:  MOVF   2D,W
+053D:  SUBLW  03
+053E:  BTFSC  03.2
+053F:  GOTO   54A
+....................    { 
+....................       Stepper1 (3048); 
+0540:  MOVLW  0B
+0541:  MOVWF  3F
+0542:  MOVLW  E8
+0543:  MOVWF  3E
+0544:  CALL   167
+....................       S1_Current_Pos = 1000; 
+0545:  MOVLW  03
+0546:  MOVWF  2D
+0547:  MOVLW  E8
+0548:  MOVWF  2C
+....................    } 
+0549:  GOTO   56E
+....................  
+....................    ELSE Stepper1 (Min_2_Steps (Time_min)) ; 
+054A:  MOVF   35,W
+054B:  MOVWF  3D
+054C:  MOVF   34,W
+054D:  MOVWF  3C
+*
+0565:  MOVF   22,W
+0566:  MOVWF  3D
+0567:  MOVF   21,W
+0568:  MOVWF  3C
+0569:  MOVF   22,W
+056A:  MOVWF  3F
+056B:  MOVF   21,W
+056C:  MOVWF  3E
+056D:  CALL   167
+....................     
+....................    //// Hours and Stepper2 //// 
+....................    time_hr = (0x1F&Read_time_BCD (0x02)); 
+056E:  MOVLW  02
+056F:  MOVWF  3C
+*
+05AD:  MOVF   21,W
+05AE:  ANDLW  1F
+05AF:  MOVWF  36
+05B0:  CLRF   37
+....................    time_hr = BCD_2_DEC (time_hr); 
+05B1:  MOVF   36,W
+05B2:  MOVWF  3E
+05B3:  CALL   4A4
+05B4:  CLRF   37
+05B5:  MOVF   21,W
+05B6:  MOVWF  36
+....................     
+....................    IF (Time_min == 0 && time_hr == 1 && S2_Current_Pos != 1170) 
+05B7:  MOVF   34,F
+05B8:  BTFSS  03.2
+05B9:  GOTO   5D4
+05BA:  MOVF   35,F
+05BB:  BTFSS  03.2
+05BC:  GOTO   5D4
+05BD:  DECFSZ 36,W
+05BE:  GOTO   5D4
+05BF:  MOVF   37,F
+05C0:  BTFSS  03.2
+05C1:  GOTO   5D4
+05C2:  MOVF   30,W
+05C3:  SUBLW  92
+05C4:  BTFSS  03.2
+05C5:  GOTO   5CA
+05C6:  MOVF   31,W
+05C7:  SUBLW  04
+05C8:  BTFSC  03.2
+05C9:  GOTO   5D4
+....................    { 
+....................       Stepper2 (3218); 
+05CA:  MOVLW  0C
+05CB:  MOVWF  3F
+05CC:  MOVLW  92
+05CD:  MOVWF  3E
+05CE:  CALL   1B6
+....................       S2_Current_Pos = 1170; 
+05CF:  MOVLW  04
+05D0:  MOVWF  31
+05D1:  MOVLW  92
+05D2:  MOVWF  30
+....................    } 
+05D3:  GOTO   62B
+....................  
+....................    ELSE Stepper2 (hours (time_hr, Time_min)); 
+05D4:  MOVF   37,W
+05D5:  MOVWF  3D
+05D6:  MOVF   36,W
+05D7:  MOVWF  3C
+05D8:  MOVF   35,W
+05D9:  MOVWF  3F
+05DA:  MOVF   34,W
+05DB:  MOVWF  3E
+*
+0622:  MOVF   22,W
+0623:  MOVWF  3D
+0624:  MOVF   21,W
+0625:  MOVWF  3C
+0626:  MOVF   22,W
+0627:  MOVWF  3F
+0628:  MOVF   21,W
+0629:  MOVWF  3E
+062A:  CALL   1B6
+062B:  BCF    0A.3
+062C:  GOTO   687 (RETURN)
+.................... } 
+....................  
+.................... void Adjust_Alarm(VOID) 
+.................... { 
+....................    IF (A2 == 0){hr_or_min = ! hr_or_min; delay_ms (100); } //Toggle Button 
+*
+0422:  BTFSC  05.2
+0423:  GOTO   42E
+0424:  MOVF   3B,F
+0425:  BTFSC  03.2
+0426:  GOTO   429
+0427:  MOVLW  00
+0428:  GOTO   42A
+0429:  MOVLW  01
+042A:  MOVWF  3B
+042B:  MOVLW  64
+042C:  MOVWF  43
+042D:  CALL   131
+....................    Stepper1 (S1_Setpoint); 
+042E:  MOVF   2F,W
+042F:  MOVWF  3F
+0430:  MOVF   2E,W
+0431:  MOVWF  3E
+0432:  CALL   167
+....................    Stepper2 (S2_Setpoint); 
+0433:  MOVF   33,W
+0434:  MOVWF  3F
+0435:  MOVF   32,W
+0436:  MOVWF  3E
+0437:  CALL   1B6
+....................    Overflow_Protect (); 
+0438:  CALL   284
+....................    IF (C1 == 1) Set_Alarm (Steps_2_hr (S2_Setpoint), Steps_2_min (S1_Setpoint), PM); 
+0439:  BTFSS  07.1
+043A:  GOTO   454
+043B:  MOVF   33,W
+043C:  MOVWF  3D
+043D:  MOVF   32,W
+043E:  MOVWF  3C
+043F:  CALL   2F2
+0440:  MOVF   22,W
+0441:  MOVWF  3D
+0442:  MOVF   21,W
+0443:  MOVWF  3C
+0444:  MOVF   2F,W
+0445:  MOVWF  3F
+0446:  MOVF   2E,W
+0447:  MOVWF  3E
+0448:  CALL   318
+0449:  MOVF   22,W
+044A:  MOVWF  3F
+044B:  MOVF   21,W
+044C:  MOVWF  3E
+044D:  MOVF   3C,W
+044E:  MOVWF  40
+044F:  MOVF   21,W
+0450:  MOVWF  41
+0451:  MOVLW  60
+0452:  MOVWF  42
+0453:  CALL   3EC
+....................    IF (C1 == 0) Set_Alarm (Steps_2_hr (S2_Setpoint), Steps_2_min (S1_Setpoint), AM); 
+0454:  BTFSC  07.1
+0455:  GOTO   46F
+0456:  MOVF   33,W
+0457:  MOVWF  3D
+0458:  MOVF   32,W
+0459:  MOVWF  3C
+045A:  CALL   2F2
+045B:  MOVF   22,W
+045C:  MOVWF  3D
+045D:  MOVF   21,W
+045E:  MOVWF  3C
+045F:  MOVF   2F,W
+0460:  MOVWF  3F
+0461:  MOVF   2E,W
+0462:  MOVWF  3E
+0463:  CALL   318
+0464:  MOVF   22,W
+0465:  MOVWF  3F
+0466:  MOVF   21,W
+0467:  MOVWF  3E
+0468:  MOVF   3C,W
+0469:  MOVWF  40
+046A:  MOVF   21,W
+046B:  MOVWF  41
+046C:  MOVLW  40
+046D:  MOVWF  42
+046E:  CALL   3EC
+046F:  BCF    0A.3
+0470:  GOTO   67C (RETURN)
+.................... } 
+....................  
+.................... void Buttons (VOID) 
+.................... { 
+....................    IF (B4 == 0){Adjust_Time_tog = ! Adjust_Time_tog; delay_ms (100); } 
+*
+024C:  BTFSC  06.4
+024D:  GOTO   258
+024E:  MOVF   38,F
+024F:  BTFSC  03.2
+0250:  GOTO   253
+0251:  MOVLW  00
+0252:  GOTO   254
+0253:  MOVLW  01
+0254:  MOVWF  38
+0255:  MOVLW  64
+0256:  MOVWF  43
+0257:  CALL   131
+....................    IF (B5 == 0){Adjust_Alarm_tog = ! Adjust_Alarm_tog; delay_ms (100); } 
+0258:  BTFSC  06.5
+0259:  GOTO   264
+025A:  MOVF   39,F
+025B:  BTFSC  03.2
+025C:  GOTO   25F
+025D:  MOVLW  00
+025E:  GOTO   260
+025F:  MOVLW  01
+0260:  MOVWF  39
+0261:  MOVLW  64
+0262:  MOVWF  43
+0263:  CALL   131
+....................     
+....................    IF (C0 == 1 && Adjust_Alarm_tog == 0 && Adjust_Time_tog == 0 && Alarm_Stat == 0){ Clear_Alarm (); Alarm_status (ON); Alarm_Stat = 1; } 
+0264:  BTFSS  07.0
+0265:  GOTO   275
+0266:  MOVF   39,F
+0267:  BTFSS  03.2
+0268:  GOTO   275
+0269:  MOVF   38,F
+026A:  BTFSS  03.2
+026B:  GOTO   275
+026C:  MOVF   3A,F
+026D:  BTFSS  03.2
+026E:  GOTO   275
+026F:  CALL   225
+0270:  MOVLW  1E
+0271:  MOVWF  3C
+0272:  CALL   10A
+0273:  MOVLW  01
+0274:  MOVWF  3A
+....................    //If C0 is high AND the time or alarm aren't being adjusted AND the alarm is't already on, Turn alarm on and change alarm status 
+....................    IF ((C0 == 0||Adjust_Alarm_tog == 1||Adjust_Time_tog == 1) &&Alarm_Stat == 1){ Alarm_status (OFF); Alarm_Stat = 0; } 
+0275:  BTFSS  07.0
+0276:  GOTO   27C
+0277:  DECFSZ 39,W
+0278:  GOTO   27A
+0279:  GOTO   27C
+027A:  DECFSZ 38,W
+027B:  GOTO   282
+027C:  DECFSZ 3A,W
+027D:  GOTO   282
+027E:  MOVLW  1C
+027F:  MOVWF  3C
+0280:  CALL   10A
+0281:  CLRF   3A
+0282:  BCF    0A.3
+0283:  GOTO   667 (RETURN)
+....................    //If C0 is low OR the time or alarm is being adjusted AND the alarm isn't already off, Turn off alarm and change alarm status 
+.................... } 
+....................  
+.................... Void Alarm_Check (VOID) 
+.................... { 
+....................    IF (C2 == 0){Delay_ms (1000); Clear_Alarm (); } 
+*
+062D:  BTFSC  07.2
+062E:  GOTO   637
+062F:  MOVLW  04
+0630:  MOVWF  3C
+0631:  MOVLW  FA
+0632:  MOVWF  43
+0633:  CALL   131
+0634:  DECFSZ 3C,F
+0635:  GOTO   631
+0636:  CALL   225
+0637:  BCF    0A.3
+0638:  GOTO   68B (RETURN)
+.................... } 
+....................  
+.................... Void Set_Zero (VOID) 
+.................... { 
+....................    WHILE (B6 == 0) 
+*
+01E5:  BTFSC  06.6
+01E6:  GOTO   1F1
+....................    { 
+....................       S1_Setpoint--; 
+01E7:  MOVF   2E,W
+01E8:  BTFSC  03.2
+01E9:  DECF   2F,F
+01EA:  DECF   2E,F
+....................       Stepper1 (S1_Setpoint); 
+01EB:  MOVF   2F,W
+01EC:  MOVWF  3F
+01ED:  MOVF   2E,W
+01EE:  MOVWF  3E
+01EF:  CALL   167
+01F0:  GOTO   1E5
+....................    } 
+....................     
+....................    WHILE (B6 == 1) 
+01F1:  BTFSS  06.6
+01F2:  GOTO   1FC
+....................    { 
+....................       S1_Setpoint++; 
+01F3:  INCF   2E,F
+01F4:  BTFSC  03.2
+01F5:  INCF   2F,F
+....................       Stepper1 (S1_Setpoint); 
+01F6:  MOVF   2F,W
+01F7:  MOVWF  3F
+01F8:  MOVF   2E,W
+01F9:  MOVWF  3E
+01FA:  CALL   167
+01FB:  GOTO   1F1
+....................    } 
+....................  
+....................  
+....................    S1_Setpoint = 1000; //The range is from 1001 to 2048. 2048 is equivalent to 1000, which is equivalent to position 0. 
+01FC:  MOVLW  03
+01FD:  MOVWF  2F
+01FE:  MOVLW  E8
+01FF:  MOVWF  2E
+....................    S1_Current_Pos = 1000; 
+0200:  MOVLW  03
+0201:  MOVWF  2D
+0202:  MOVLW  E8
+0203:  MOVWF  2C
+....................     
+....................    WHILE (B7 == 0) 
+0204:  BTFSC  06.7
+0205:  GOTO   210
+....................    { 
+....................       S2_Setpoint--; 
+0206:  MOVF   32,W
+0207:  BTFSC  03.2
+0208:  DECF   33,F
+0209:  DECF   32,F
+....................       Stepper2 (S2_Setpoint); 
+020A:  MOVF   33,W
+020B:  MOVWF  3F
+020C:  MOVF   32,W
+020D:  MOVWF  3E
+020E:  CALL   1B6
+020F:  GOTO   204
+....................    } 
+....................     
+....................    WHILE (B7 == 1) 
+0210:  BTFSS  06.7
+0211:  GOTO   21B
+....................    { 
+....................       S2_Setpoint++; 
+0212:  INCF   32,F
+0213:  BTFSC  03.2
+0214:  INCF   33,F
+....................       Stepper2 (S2_Setpoint); 
+0215:  MOVF   33,W
+0216:  MOVWF  3F
+0217:  MOVF   32,W
+0218:  MOVWF  3E
+0219:  CALL   1B6
+021A:  GOTO   210
+....................    } 
+....................     
+....................    S2_Setpoint = 1000; //The range is from 1001 to 2048. 2048 is equivalent to 1000, which is equivalent to position 0. 
+021B:  MOVLW  03
+021C:  MOVWF  33
+021D:  MOVLW  E8
+021E:  MOVWF  32
+....................    S2_Current_Pos = 1000; 
+021F:  MOVLW  03
+0220:  MOVWF  31
+0221:  MOVLW  E8
+0222:  MOVWF  30
+0223:  BCF    0A.3
+0224:  GOTO   666 (RETURN)
+.................... } 
+....................  
+
+Configuration Fuses:
+   Word  1: 3FE4   INTRC_IO NOWDT PUT MCLR NOPROTECT NOCPD BROWNOUT IESO FCMEN

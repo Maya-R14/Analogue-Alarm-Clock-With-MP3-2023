@@ -1,0 +1,103 @@
+#include <MCP23008.h>
+int16 S1_Current_Pos;
+int16 S1_Setpoint;
+int16 S2_Current_Pos;
+int16 S2_Setpoint;
+
+void Enable_Steppers(void)
+{
+Enable_MCP23008();
+S1_Setpoint = 10000;
+S1_Current_Pos = 10000;
+S2_Setpoint = 10000;
+S2_Current_Pos = 10000;
+}
+
+void S1_Fire_Coils(INT16 S1_Current_Pos)
+{
+   delay_ms (2);
+   INT remainder;
+   remainder = S1_Current_Pos % 4;
+
+   IF (remainder == 0){MCP23008_OUT (0b00010000);}
+   IF (remainder == 1){MCP23008_OUT (0b00100000);}
+   IF (remainder == 2){MCP23008_OUT (0b01000000);}
+   IF (remainder == 3){MCP23008_OUT (0b10000000);}
+}
+
+void Stepper1(INT16 S1_Setpoint)
+{
+   WHILE (S1_Current_Pos != S1_Setpoint) //repeat while current position and S1_Setpoint don't match
+   {
+      IF (S1_Current_Pos < S1_Setpoint)
+      {
+         S1_Current_Pos++; //increase current position
+         S1_Fire_Coils (S1_Current_Pos);
+      }
+
+      IF (S1_Current_Pos > S1_Setpoint)
+      {
+         S1_Current_Pos--; //decrease current position
+         S1_Fire_Coils (S1_Current_Pos);
+      }
+   }
+}
+
+void S2_Fire_Coils(INT16 S2_Current_Pos)
+{
+   delay_ms (2);
+   INT remainder;
+   remainder = S2_Current_Pos % 4;
+
+   IF (remainder == 0){MCP23008_OUT (0b00000001);}
+   IF (remainder == 1){MCP23008_OUT (0b00000010);}
+   IF (remainder == 2){MCP23008_OUT (0b00000100);}
+   IF (remainder == 3){MCP23008_OUT (0b00001000);}
+}
+
+void Stepper2(INT16 S2_Setpoint)
+{
+   WHILE (S2_Current_Pos != S2_Setpoint) //repeat while current position and S2_Setpoint don't match
+   {
+      IF (S2_Current_Pos < S2_Setpoint)
+      {
+         S2_Current_Pos++; //increase current position
+         S2_Fire_Coils (S2_Current_Pos);
+      }
+
+      IF (S2_Current_Pos > S2_Setpoint)
+      {
+         S2_Current_Pos--; //decrease current position
+         S2_Fire_Coils (S2_Current_Pos);
+      }
+   }
+}
+
+
+void Overflow_Protect (VOID)
+{
+   IF (S1_Current_Pos > 3047)
+   {
+      S1_Current_Pos -= 2048;
+      S1_Setpoint -= 2048;
+   }
+
+   IF (S1_Current_Pos < 1000)
+   {
+      S1_Current_Pos += 2048;
+      S1_Setpoint += 2048;
+   }
+
+   IF (S2_Current_Pos > 3047)
+   {
+      S2_Current_Pos -= 2048;
+      S2_Setpoint -= 2048;
+   }
+
+   IF (S2_Current_Pos < 1000)
+   {
+      S2_Current_Pos += 2048;
+      S2_Setpoint += 2048;
+   }
+}
+

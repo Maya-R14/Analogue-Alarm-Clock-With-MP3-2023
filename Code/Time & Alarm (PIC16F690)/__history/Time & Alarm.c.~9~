@@ -1,0 +1,172 @@
+#include <Set_Time.h>
+#include <DS3231.h>
+#include <Stepper_Header_V2.h>
+#Include <Steps_2_time.h>
+
+#bit A2 = 0x05.2 //Encoder PB
+#bit A4 = 0x05.4 //Encoder S2
+#bit A5 = 0x05.5 //Encoder S1
+
+
+#bit B4 = 0x06.4 //PB Adjust_Time_Tog
+#bit B5 = 0x06.5 //PB Adjust_Alarm_Tog
+#bit B6 = 0x06.6 
+#bit B7 = 0x06.7
+
+
+#bit C0 = 0x07.0 //Switch Alarm ON/OFF
+#bit C1 = 0x07.1 //Switch AM/PM
+#bit C2 = 0x07.2 //Alarm INT
+#bit C3 = 0x07.3
+//#bit C4 = 0x07.4 //I2C MS23008 
+//#bit C5 = 0x07.5 //I2C MS23008
+//#bit C6 = 0x07.6 //I2C DS3231
+//#bit C7 = 0x07.7 //I2C DS3231
+int16 time_min;
+int16 time_hr;
+
+void Adjust_time(VOID);
+void Adjust_Alarm(VOID);
+void display_time(VOID);
+
+void Buttons (void);
+
+int Adjust_Time_tog;
+int Adjust_Alarm_tog;
+
+int hr_or_min;
+
+Void Alarm_Check(void);
+
+#INT_RA
+void  RA_isr(VOID) 
+{
+   IF (hr_or_min == 0)
+   {
+      IF (A4 == 1&&A5 == 1) S2_Setpoint += 17; 
+      IF (A4 == 0&&A5 == 1) S2_Setpoint -= 17; //maybe change to 85.
+   }
+
+   IF (hr_or_min == 1)
+   {
+      IF (A4 == 1&&A5 == 1) S1_Setpoint += 17; 
+      IF (A4 == 0&&A5 == 1) S1_Setpoint -=  17;
+   }
+}
+
+void main()
+{
+   Enable_Steppers ();
+   
+   TRISA = 0xff;
+   TRISB = 0xff;
+   TRISC = 0XFF;
+   
+   enable_interrupts (GLOBAL) ;
+   
+   Time_hr = 12;
+   Time_min = 0;
+   hr_or_min = 0;
+   
+   Adjust_Time_tog = 1;
+   Adjust_Alarm_tog = 0;
+   
+   
+   WHILE (TRUE)
+   {
+   Buttons();
+      
+      IF (Adjust_Time_tog == 1 && Adjust_Alarm_tog == 0)
+      {
+         enable_interrupts (INT_RA5);
+         Adjust_time () ;
+      } 
+      
+      IF (Adjust_Time_tog == 0 && Adjust_Alarm_tog == 1)
+      {
+         enable_interrupts (INT_RA5);
+         Adjust_Alarm();
+      }
+      
+      IF (Adjust_Time_tog == 1 && Adjust_Alarm_tog == 1)
+      {
+         Adjust_Time_tog=0;
+         Adjust_Time_tog=0;
+      }
+      
+      IF (Adjust_Time_tog == 0 && Adjust_Alarm_tog == 0)
+      {
+         disable_interrupts (INT_RA5);
+         Display_time ();
+      }
+
+ //     Alarm_Check();
+   }
+}
+
+void Adjust_time(VOID)
+{
+   IF (A2 == 0) hr_or_min = !hr_or_min; //Toggle Button
+   Stepper1 (S1_Setpoint) ;
+   Stepper2 (S2_Setpoint) ;
+   Overflow_Protect () ;
+
+   IF (C1 == 1) Set_Time (Steps_2_hr (S2_Setpoint), Steps_2_min (S1_Setpoint), PM);
+   IF (C1 == 0) Set_Time (Steps_2_hr (S2_Setpoint), Steps_2_min (S1_Setpoint), AM);
+}
+
+void display_time(VOID)
+{
+   //// Minutes and Stepper1 ////
+   Time_min = Read_time_DEC (0x01);
+   
+   IF (Time_min == 0&&S1_Current_Pos != 1000)
+   {
+      Stepper1 (3048);
+      S1_Current_Pos = 1000;
+   }
+
+   ELSE Stepper1 (Min_2_Steps (Time_min)) ;
+   
+   //// Hours and Stepper2 ////
+   time_hr = (0x1F&Read_time_BCD (0x02));
+   time_hr = BCD_2_DEC (time_hr);
+   
+   IF (Time_min == 0&&time_hr == 1&&S2_Current_Pos != 1170)
+   {
+      Stepper2 (3218);
+      S2_Current_Pos = 1170;
+   }
+
+   ELSE Stepper2 (hours (time_hr, Time_min));
+}
+
+void Adjust_Alarm(VOID)
+{
+   IF (A2 == 0) hr_or_min = ! hr_or_min; //Toggle Button
+   Stepper1 (S1_Setpoint) ;
+   Stepper2 (S2_Setpoint) ;
+   Overflow_Protect () ;
+
+   IF (C1 == 1) Set_Alarm (Steps_2_hr (S2_Setpoint), Steps_2_min (S1_Setpoint), PM);
+   IF (C1 == 0) Set_Alarm (Steps_2_hr (S2_Setpoint), Steps_2_min (S1_Setpoint), AM);
+}
+
+void Buttons (void)
+{
+      IF (B4 == 1) Adjust_Time_tog = !Adjust_Time_tog;
+      IF (B5 == 1) Adjust_Alarm_tog = !Adjust_Alarm_tog;
+      
+      IF (C0== 1 && Adjust_Alarm_tog == 0 && Adjust_Time_tog==0) Clear_Alarm(); Alarm_status(ON);
+      IF (C0 == 0 || Adjust_Alarm_tog == 1 || Adjust_Time_tog==1) Alarm_status(OFF);
+}
+Void Alarm_Check (void)
+{
+If(C2 == 0) 
+{
+Delay_ms(1000); 
+Clear_Alarm(); 
+}
+}
+
+//Don't forget to change to else If where possible.
